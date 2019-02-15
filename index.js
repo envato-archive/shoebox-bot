@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 9001));
 
 var VERIFICATION_TOKEN = process.env.SLACK_VERIFICATION_TOKEN || 'faketoken';
+var API_TOKEN = process.env.API_ACCESS_TOKEN || 'fakeapitoken';
 var BOT_TOKEN = process.env.BOT_USER_ACCESS_TOKEN || 'fakebottoken';
 
 function post_message(channel, text) {
@@ -21,11 +22,12 @@ function post_message(channel, text) {
       text: text
     },
     headers: {
+      'Authorization': 'Bearer ' + BOT_TOKEN,
       'Content-Type': 'application/json'
     }
   }, function (err, res) {
     console.log('error', err);
-    console.log('response', res);
+    console.log('response', res.body);
   });
 }
 
