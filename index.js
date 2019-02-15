@@ -15,7 +15,7 @@ app.get('/', function(req, res){
   res.send('It works!');
 });
 
-app.post('/post', function(req, res){
+app.post('/event', function(req, res){
   switch(req.body.type) {
     case "url_verification":
       var token = req.body.token;
