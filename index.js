@@ -13,7 +13,7 @@ app.get('/', function(req, res){
   res.send('It works!');
 });
 
-app.post('/post', function(req, res){
+app.post('/event', function(req, res){
   var body = {
     response_type: "in_channel",
     text: "hello, slack..."
