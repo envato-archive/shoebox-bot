@@ -23,6 +23,9 @@ function post_message(channel, text) {
     headers: {
       'Content-Type': 'application/json'
     }
+  }, function (err, res) {
+    console.log('error', err);
+    console.log('response', res);
   });
 }
 
@@ -51,6 +54,8 @@ app.post('/event', function (req, res) {
       switch (event_body.type) {
         case "app_mention":
           post_message(event_body.channel, "🗣🤚");
+          res.status(200);
+          res.send('');
           break;
         default:
           console.log('unknown callback event type: ' + event_body.type);
