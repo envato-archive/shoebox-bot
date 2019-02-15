@@ -37,6 +37,8 @@ app.post('/event', function(req, res){
       });
     break;
     default:
+      console.log('type: ' + req.body.type);
+      console.log(Object.keys(res.body));
       res.status(400);
       res.send('');
     break;
