@@ -30,6 +30,12 @@ app.post('/event', function(req, res){
         res.send('');
       }
     break;
+    case "app_mention":
+      res.send({
+        response_type: "in_channel",
+        text: "🗣🤚"
+      });
+    break;
     default:
       res.status(400);
       res.send('');
