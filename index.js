@@ -14,27 +14,12 @@ app.get('/', function(req, res){
 });
 
 app.post('/post', function(req, res){
-  var parsed_url = url.format({
-    pathname: 'https://api.genius.com/search',
-    query: {
-      access_token: process.env.GENIUS_ACCESS,
-      q: req.body.text
-    }
-  });
+  var body = {
+    response_type: "in_channel",
+    text: "hello, slack..."
+  };
 
-  request(parsed_url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var data = JSON.parse(body);
-      var first_url = data.response.hits[0].result.url;
-
-      var body = {
-        response_type: "in_channel",
-        text: first_url
-      };
-
-      res.send(body);
-    }
-  });
+  res.send(body);
 });
 
 app.listen(app.get('port'), function() {
