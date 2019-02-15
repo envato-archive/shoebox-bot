@@ -1,2 +1,2 @@
-# shoebox_bot
+# shoebox-bot
 A Slackbot that talks to Shoebox
