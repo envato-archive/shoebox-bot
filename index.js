@@ -10,6 +10,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 9001));
 
 var VERIFICATION_TOKEN = process.env.SLACK_VERIFICATION_TOKEN || 'faketoken';
+var BOT_TOKEN = process.env.BOT_USER_ACCESS_TOKEN || 'fakebottoken';
+
+function post_message(channel, text) {
+  request.post("https://slack.com/api/chat.postMessage", {
+    json: true,
+    body: {
+      token: BOT_TOKEN,
+      channel: channel,
+      text: text
+    },
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
 
 app.get('/', function (req, res) {
   res.send('It works!');
@@ -35,10 +50,7 @@ app.post('/event', function (req, res) {
 
       switch (event_body.type) {
         case "app_mention":
-          res.send({
-            response_type: "in_channel",
-            text: "🗣🤚"
-          });
+          post_message(event_body.channel, "🗣🤚");
           break;
         default:
           console.log('unknown callback event type: ' + event_body.type);
